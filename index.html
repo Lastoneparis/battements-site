@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Battements — Il te reste combien de battements de cœur ?</title>
+<meta name="description" content="Battements calcule combien de battements de cœur il te reste et les fait défiler en direct. Widgets, Dynamic Island et Apple Watch. Un memento mori moderne.">
+<style>
+  :root { color-scheme: dark; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
+  main { max-width: 640px; padding: 12vh 24px 8vh; text-align: center; flex: 1; }
+  .heart { font-size: 56px; color: #FF385F; animation: beat 0.86s ease-in-out infinite; display: inline-block; filter: drop-shadow(0 0 24px rgba(255,56,95,.5)); }
+  @keyframes beat { 0%,100% { transform: scale(1); } 12% { transform: scale(1.16); } 24% { transform: scale(1); } 36% { transform: scale(1.09); } 48% { transform: scale(1); } }
+  @media (prefers-reduced-motion: reduce) { .heart { animation: none; } }
+  .kicker { letter-spacing: .5em; font-size: 13px; color: rgba(255,255,255,.55); margin: 32px 0 10px; }
+  #counter { font-size: clamp(40px, 9vw, 72px); font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: -1px; }
+  .sub { color: rgba(255,255,255,.55); font-size: 19px; margin-top: 8px; }
+  .pitch { color: rgba(255,255,255,.75); font-size: 17px; line-height: 1.6; margin: 40px auto 0; max-width: 460px; }
+  .cta { display: inline-block; margin-top: 36px; background: #FF385F; color: #000; font-weight: 700; padding: 15px 34px; border-radius: 999px; text-decoration: none; font-size: 17px; }
+  .cta.soon { background: rgba(255,255,255,.1); color: rgba(255,255,255,.6); pointer-events: none; }
+  footer { padding: 28px; display: flex; gap: 24px; font-size: 13px; }
+  footer a { color: rgba(255,255,255,.55); text-decoration: none; }
+  footer a:hover { color: #fff; }
+</style>
+</head>
+<body>
+<main>
+  <span class="heart" aria-hidden="true">♥</span>
+  <p class="kicker">IL TE RESTE</p>
+  <div id="counter">1 785 000 000</div>
+  <p class="sub">battements de cœur</p>
+  <p class="pitch">Battements estime combien de battements il te reste — d'après ton âge, l'espérance de vie moyenne et ton rythme cardiaque — et les fait défiler en direct. Sur ton écran verrouillé, dans la Dynamic Island et à ton poignet.<br><br><em>Un memento mori moderne. Chaque battement compte.</em></p>
+  <a class="cta soon" href="#">Bientôt sur l'App Store</a>
+</main>
+<footer>
+  <a href="privacy.html">Confidentialité · Privacy</a>
+  <a href="support.html">Assistance · Support</a>
+</footer>
+<script>
+  // Compteur qui bat en direct (~70/min), point de départ arbitraire.
+  let n = 1785000000;
+  const el = document.getElementById("counter");
+  const fmt = new Intl.NumberFormat(navigator.language || "fr");
+  setInterval(() => { n -= 1; el.textContent = fmt.format(n); }, 857);
+  el.textContent = fmt.format(n);
+</script>
+</body>
+</html>
